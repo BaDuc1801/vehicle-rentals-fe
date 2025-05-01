@@ -222,11 +222,11 @@ const PaymentDetail = () => {
                             </Radio.Group>
                         </FormItem>
                         <Form.Item className='text-center'>
-                            <Button type='primary' className='mr-5' onClick={() => setIsModalOpen(true)}>
-                                Hoàn tất đặt xe
-                            </Button>
-                            <Button onClick={() => navigate(-1)}>
+                            <Button onClick={() => navigate(-1)}  className='mr-5' >
                                 Quay lại
+                            </Button>
+                            <Button type='primary' onClick={() => setIsModalOpen(true)}>
+                                Hoàn tất đặt xe
                             </Button>
                         </Form.Item>
                     </Form>
