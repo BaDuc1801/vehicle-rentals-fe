@@ -93,7 +93,7 @@ const CheckingPage = () => {
       />
       <div className='grid grid-cols-3 max-lg:grid-cols-1 max-w-[1250px] max-md:max-w-[700px] mx-auto max-lg:mx-[50px] max-lg:gap-x-0 gap-x-6 px-4 pb-10'>
         <div className='col-span-2 rounded-md bg-white pb-4'>
-          <div className='flex justify-center gap-5'>
+          <div className='flex justify-center gap-5 max-md:flex-col max-md:gap-0'>
             <img src={selectedVehicle?.img} className='w-[350px] h-[300px] flex-1 p-4 rounded-md' />
             <div className='p-4 flex-1'>
               <p className='text-2xl font-bold mb-5 text-[#127d81]'>{selectedVehicle?.name}</p>
