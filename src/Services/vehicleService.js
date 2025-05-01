@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = import.meta.env.VITE_BE_URL;
+const apiUrl = import.meta.env.VITE_APP_BE_URL;
 const vehicleUrl = `${apiUrl}/vehicles`;
 
 const vehicleService = {

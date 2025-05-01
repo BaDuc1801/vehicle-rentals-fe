@@ -1,7 +1,7 @@
 import axios from "axios";
 import axiosJWT from "./axiosJWT";
 
-const apiUrl = import.meta.env.VITE_BE_URL;
+const apiUrl = import.meta.env.VITE_APP_BE_URL;
 const userUrl = `${apiUrl}/users`;
 
 const userService = {

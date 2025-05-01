@@ -1,7 +1,6 @@
 import axiosJWT from "./axiosJWT"
-import userService from "./userService";
 
-const apiUrl = import.meta.env.VITE_BE_URL;
+const apiUrl = import.meta.env.VITE_APP_BE_URL;
 const paymentUrl = `${apiUrl}/payments`;
 
 const paymentService = {
