@@ -221,7 +221,7 @@ const PaymentDetail = () => {
                             >
                             </Radio.Group>
                         </FormItem>
-                        <Form.Item className=''>
+                        <Form.Item className='text-center'>
                             <Button type='primary' className='mr-5' onClick={() => setIsModalOpen(true)}>
                                 Hoàn tất đặt xe
                             </Button>
