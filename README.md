@@ -1,12 +1,25 @@
-# React + Vite
+# Website đăng ký thuê xe tự lái
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Deploy: https://vehicle-rentals-fe.vercel.app/
 
-Currently, two official plugins are available:
+![alt text](image.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Công nghệ sử dụng
+- Front-End: React.JS, Tailwind CSS
+- Back-End: NodeJS(Express)
+- Database: NoSQL(MongoDB)
 
-## Expanding the ESLint configuration
+## Các chức năng chính
+- CRUD người dùng, xe cho thuê
+- Chọn và đặt xe
+- Chức năng tìm kiếm và lọc xe
+- Quản lý đơn đặt hàng
+- Trang quản trị viên
+- Giao diện responsive
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tài khoản nhân viên
+- Email: admin@gmail.com
+- Password: admin
+
+## Khởi chạy dự án
+npm run dev
