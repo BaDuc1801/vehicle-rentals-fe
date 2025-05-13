@@ -1,5 +1,6 @@
 import axios from "axios";
 import axiosJWT from "./axiosJWT";
+import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_APP_BE_URL;
 const userUrl = `${apiUrl}/users`;
@@ -30,6 +31,9 @@ const userService = {
 
     getUserInformation: async (accessToken) => {
         try {
+            if (!accessToken) {
+                return null;
+            }
             const respond = await axiosJWT.get(`${userUrl}/get-infor`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
@@ -37,7 +41,7 @@ const userService = {
             });
             return respond.data;
         } catch (error) {
-            alert("Phiên đăng nhập hết hạn")
+            toast.error("Phiên đăng nhập hết hạn")
             localStorage.removeItem('access_token')
             localStorage.removeItem('checkingBill')
         }
