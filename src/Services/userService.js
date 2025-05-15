@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_APP_BE_URL;
 const userUrl = `${apiUrl}/users`;
+let hasToastShown = false;
 
 const userService = {
     getAccessToken: () => {
@@ -38,8 +39,10 @@ const userService = {
             });
             return respond.data;
         } catch (error) {
-            toast.error("Phiên đăng nhập hết hạn")
-            localStorage.removeItem('access_token')
+            if (!hasToastShown) {
+                toast.error("Phiên đăng nhập hết hạn");
+                hasToastShown = true;
+            } localStorage.removeItem('access_token')
             localStorage.removeItem('checkingBill')
         }
     },
