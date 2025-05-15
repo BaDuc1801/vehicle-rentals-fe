@@ -31,9 +31,6 @@ const userService = {
 
     getUserInformation: async (accessToken) => {
         try {
-            if (!accessToken) {
-                return null;
-            }
             const respond = await axiosJWT.get(`${userUrl}/get-infor`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
