@@ -39,7 +39,7 @@ const Login = () => {
                 <Form
                     layout='vertical'
                     form={form}
-                    className='bg-white w-2/3 max-sm:w-[98%] max-sm:!mx-2 p-5 rounded-md absolute'
+                    className='bg-white w-2/3 max-sm:w-[98%] p-5 rounded-md absolute'
                     onFinish={onFinish}
                 >
                     <p className='text-[24px] font-semibold text-[#2a8e87] text-center'>Đăng nhập</p>

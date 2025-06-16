@@ -34,7 +34,7 @@ const ChangePassword = () => {
                 form={form}
                 onFinish={onFinish}
                 layout='vertical'
-                className='bg-white p-5 my-10 w-1/3 max-sm:w-full max-sm:!mx-2 h-[90%] rounded-md'
+                className='bg-white p-5 my-10 w-1/3 max-sm:[98%] h-[90%] rounded-md'
             >
                 <p className='text-[24px] font-semibold text-[#2a8e87] text-center'>Đổi mật khẩu</p>
                 <Form.Item
