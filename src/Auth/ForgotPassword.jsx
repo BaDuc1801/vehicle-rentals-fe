@@ -44,7 +44,7 @@ const ForgotPassword = () => {
                     layout='vertical'
                     form={form}
                     onFinish={onFinish}
-                    className='bg-white w-2/3 max-sm:w-full max-sm:mx-2 p-5 rounded-md absolute'
+                    className='bg-white w-2/3 max-sm:w-full max-sm:!mx-2 p-5 rounded-md absolute'
                 >
                     <p className='text-[24px] font-semibold text-[#2a8e87] text-center'>Quên mật khẩu</p>
                     <hr className='my-5' />
