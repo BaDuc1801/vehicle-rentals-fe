@@ -1,35 +1,14 @@
-import React, { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import Footer from '../Components/Footer'
-import { useDispatch } from 'react-redux'
-import userService from '../Services/userService'
-import { setUser } from '../Redux/userStore'
 import HeaderNavBar from '../Components/HeaderNavBar'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { getSessionType } from '../Services/sessionService';
 
 const ClientPage = () => {
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        const accessToken = userService.getAccessToken();
-
-        if (accessToken) {
-            fetchUserProfile(accessToken);
-        }
-    }, []);
-
-    const fetchUserProfile = async (token) => {
-        try {
-            const userData = await userService.getUserInformation(token);
-            dispatch(setUser(userData));
-        } catch (error) {
-            console.log('Error fetching user profile:', error);
-        }
-    };
-
+    // console.log(getSessionType())
     return (
-        <div className='text-[#0A4348] flex flex-col min-h-screen'>
+        <div className='text-[#0A4348] flex flex-col min-h-screen max-w-[1700px] m-auto'>
             <ToastContainer
                 position="top-center"
                 autoClose={3000}

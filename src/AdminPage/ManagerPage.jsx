@@ -1,5 +1,5 @@
 import { Menu } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import userService from '../Services/userService';
 import { AiFillHome } from 'react-icons/ai';
@@ -10,8 +10,12 @@ const ManagerPage = () => {
 
     useEffect(() => {
         const fetchUser = async () => {
-            const user = await userService.getUserInformation(userService.getAccessToken());
-
+            try {
+                const user = await userService.getUserInformation();
+            } catch (error) {
+                console.log(error);
+                nav("/")
+            }
             if (user?.role === 'Admin') {
                 const currentPath = window.location.pathname;
                 const defaultPath = '/quan-ly/doanh-so';

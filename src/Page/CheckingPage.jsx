@@ -1,5 +1,5 @@
 import { Checkbox, Input, Steps, DatePicker, Button, Form, Modal } from 'antd';
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { SearchContext } from '../Context/SearchContext';
 import { TbManualGearboxFilled } from 'react-icons/tb';
@@ -11,7 +11,7 @@ import { SiTicktick } from 'react-icons/si';
 import { PiMoneyBold } from 'react-icons/pi';
 const { RangePicker } = DatePicker;
 import moment from 'dayjs'
-import userService from '../Services/userService';
+import { useSelector } from 'react-redux';
 
 const CheckingPage = () => {
   const { vehicleType, location } = useParams();
@@ -55,10 +55,9 @@ const CheckingPage = () => {
   };
 
   const { form } = Form.useForm();
-
+  const user = useSelector(state => state.user)
   const onFinish = (values) => {
-    const user = userService.getAccessToken()
-    if (user) {
+    if (user.email) {
       localStorage.setItem("checkingBill", JSON.stringify({ address: values.address, totalPrice: totalPrice, deposit: deposit, rentalDays }))
       navigate('/thong-tin-khach-hang')
     }

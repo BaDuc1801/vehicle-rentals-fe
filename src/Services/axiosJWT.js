@@ -1,25 +1,42 @@
 import axios from "axios";
 import userService from "./userService";
-import { jwtDecode } from "jwt-decode";
+import { toast } from "react-toastify";
+import { clearSession, getSessionType, setSessionType } from "./sessionService";
 
-const axiosJWT = axios.create();
+const axiosJWT = axios.create({
+  withCredentials: true,
+});
 
-axiosJWT.interceptors.request.use(
-    async (config) => {
-        const currentTime = new Date();
-        const access_token = JSON.parse(localStorage.getItem('access_token'));
-        const decoded = jwtDecode(access_token);
-        
-        if (decoded?.exp < currentTime.getTime() / 1000) {
-          const data = await userService.refreshAccessToken();
-          localStorage.setItem('access_token', JSON.stringify(data?.accessToken));
-          config.headers["Authorization"] = `Bearer ${data?.accessToken}`;
+axiosJWT.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (
+      error.response &&
+      error.response.status === 401 &&
+      !originalRequest._retry
+    ) {
+      originalRequest._retry = true;
+      try {
+        await userService.refreshAccessToken();
+        return axiosJWT(originalRequest);
+      } catch (err) {
+        if (getSessionType() !== "guest") {
+          toast.info("Phiên đăng nhập đã hết hạn", {
+            onClose: () => {
+              window.location.href = "/";
+            },
+          });
+          clearSession();
+          setSessionType("guest");
         }
-        return config;
-      },
-      (error) => {
-        return Promise.reject(error);
+        return Promise.reject(err);
       }
-)
+    }
 
-export default axiosJWT
+    return Promise.reject(error);
+  }
+);
+
+export default axiosJWT;

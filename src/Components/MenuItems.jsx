@@ -13,7 +13,6 @@ const MenuItems = () => {
 
     const handleLogout = async () => {
         await userService.logOut();
-        localStorage.removeItem('access_token')
         localStorage.removeItem('checkingBill')
         dispatch(resetUser())
         nav('/dang-nhap')

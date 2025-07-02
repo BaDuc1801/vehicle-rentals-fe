@@ -27,15 +27,11 @@ const PaymentDetail = () => {
     useEffect(() => {
         setSelectedVehicle(JSON.parse(localStorage.getItem("checkingVehicle")))
         setCheckingBill(JSON.parse(localStorage.getItem("checkingBill")))
-        const accessToken = localStorage.getItem('access_token');
-
-        if (accessToken) {
-            fetchUserProfile(JSON.parse(accessToken));
-        }
+        fetchUserProfile();
     }, [])
 
-    const fetchUserProfile = async (token) => {
-        const userData = await userService.getUserInformation(token);
+    const fetchUserProfile = async () => {
+        const userData = await userService.getUserInformation();
         setUserData(userData);
     };
 
@@ -222,7 +218,7 @@ const PaymentDetail = () => {
                             </Radio.Group>
                         </FormItem>
                         <Form.Item className='text-center'>
-                            <Button onClick={() => navigate(-1)}  className='mr-5' >
+                            <Button onClick={() => navigate(-1)} className='mr-5' >
                                 Quay lại
                             </Button>
                             <Button type='primary' onClick={() => setIsModalOpen(true)}>

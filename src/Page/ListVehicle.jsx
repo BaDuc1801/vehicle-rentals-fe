@@ -1,4 +1,3 @@
-import React from 'react'
 import DetailVehicle from './DetailVehicle'
 
 const ListVehicle = ({vehicles}) => {

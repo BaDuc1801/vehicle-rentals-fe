@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     email: "",
-    password: "",
     username: "",
     phonenumber: "",
     role: "",
@@ -17,7 +16,6 @@ const userSlice = createSlice({
         setUser: (state, action) => {
             const {
                 email ="",
-                password ="",
                 username ="",
                 phonenumber ="",
                 role ="",
@@ -26,7 +24,6 @@ const userSlice = createSlice({
             } = action.payload; 
 
             state.email = email
-            state.password = password
             state.username = username
             state.phonenumber = phonenumber
             state.role = role
@@ -36,7 +33,6 @@ const userSlice = createSlice({
 
         resetUser: (state) => {
             state.email =""
-            state.password =""
             state.username =""
             state.phonenumber =""
             state.role =""

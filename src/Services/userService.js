@@ -1,16 +1,10 @@
 import axios from "axios";
 import axiosJWT from "./axiosJWT";
-import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_APP_BE_URL;
 const userUrl = `${apiUrl}/users`;
-let hasToastShown = false;
 
 const userService = {
-    getAccessToken: () => {
-        return JSON.parse(localStorage.getItem("access_token"))
-    },
-
     login: async (email, password) => {
         const res = await axios.post(`${userUrl}/login`, {
             email,
@@ -18,6 +12,16 @@ const userService = {
         }, {
             withCredentials: true,
         })
+        return res.data
+    },
+
+    loginGoogle: async (tokenGoogle) => {
+        const res = await axios.post(`${userUrl}/login-google`, {
+            tokenGoogle: tokenGoogle
+        }, {
+            withCredentials: true,
+        }
+        );
         return res.data
     },
 
@@ -30,25 +34,20 @@ const userService = {
         return res.data
     },
 
-    getUserInformation: async (accessToken) => {
-        try {
-            const respond = await axiosJWT.get(`${userUrl}/get-infor`, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
+    getUserInformation: async () => {
+        const respond = await axiosJWT.get(`${userUrl}/get-infor`,
+            {
+                withCredentials: true
             });
-            return respond.data;
-        } catch (error) {
-            if (!hasToastShown) {
-                toast.error("Phiên đăng nhập hết hạn");
-                hasToastShown = true;
-            } localStorage.removeItem('access_token')
-            localStorage.removeItem('checkingBill')
-        }
+        return respond.data;
     },
 
     logOut: async () => {
-        const response = await axios.post(`${userUrl}/logout`);
+        const response = await axios.post(`${userUrl}/logout`, {},
+            {
+                withCredentials: true
+            }
+        );
         return response.data;
     },
 
@@ -56,35 +55,29 @@ const userService = {
         const res = await axios.post(`${userUrl}/refresh-token`,
             {},
             {
-                withCredentials: true,     // Lấy cookies chứa refreshToken cho vào req
+                withCredentials: true,
             }
         );
         return res.data
     },
 
-    updateUserInfor: async (accessToken, data) => {
+    updateUserInfor: async (data) => {
         const res = await axiosJWT.put(`${userUrl}/update-infor`, data, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`
-            }
+            withCredentials: true
         });
         return res.data
     },
 
-    updateAvatar: async (accessToken, avatar) => {
+    updateAvatar: async (avatar) => {
         const res = await axiosJWT.put(`${userUrl}/up-avatar`, avatar, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`
-            }
+            withCredentials: true
         })
         return res.data
     },
 
     changePassword: async (accessToken, newPass) => {
         const res = await axiosJWT.put(`${userUrl}/change-password`, newPass, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`
-            }
+            withCredentials: true
         })
     },
 
@@ -101,9 +94,7 @@ const userService = {
     updateUserByAmin: async (userId, data) => {
         const accessToken = userService.getAccessToken();
         const res = await axiosJWT.put(`${userUrl}/user/${userId}`, data, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`
-            }
+            withCredentials: true
         })
         return res.data
     },

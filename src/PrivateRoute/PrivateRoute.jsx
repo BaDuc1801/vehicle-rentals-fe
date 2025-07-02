@@ -1,9 +1,9 @@
-import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import userService from "../Services/userService";
+import { useSelector } from "react-redux";
 
 const PrivateRoute = () => {
-  const isAuthenticated = userService.getAccessToken() !== null;
+  const user = useSelector(state => state.user)
+  const isAuthenticated = user.email !== "";
   return isAuthenticated ? <Outlet /> : <Navigate to="/" />;
 };
 

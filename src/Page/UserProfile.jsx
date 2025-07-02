@@ -15,15 +15,11 @@ const UserProfile = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        const accessToken = localStorage.getItem('access_token');
-
-        if (accessToken) {
-            fetchUserProfile(JSON.parse(accessToken));
-        }
+        fetchUserProfile();
     }, []);
 
-    const fetchUserProfile = async (token) => {
-        const userData = await userService.getUserInformation(token);
+    const fetchUserProfile = async () => {
+        const userData = await userService.getUserInformation();
         setUserData(userData);
     };
 
