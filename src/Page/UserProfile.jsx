@@ -1,27 +1,19 @@
 import { Button, Col, Form, Input, message, Row, Spin } from 'antd'
 import React, { useEffect, useState } from 'react'
 import userService from '../Services/userService'
-import { useDispatch } from 'react-redux'
-import { setUser } from '../Redux/userStore'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAvatar, setUser } from '../Redux/userStore'
 
 const UserProfile = () => {
     const [form] = Form.useForm()
-    const [user, setUserData] = useState()
     const [isChanged, setIsChanged] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
     const [selectedImage, setSelectedImage] = useState(null);
-    const [imagePreview, setImagePreview] = useState(user?.avatar);
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        fetchUserProfile();
-    }, []);
-
-    const fetchUserProfile = async () => {
-        const userData = await userService.getUserInformation();
-        setUserData(userData);
-    };
+    const user = useSelector(state => state.user)
+    const [imagePreview, setImagePreview] = useState(user?.avatar);
 
     if (!user) {
         return <Spin size="large" className='w-full h-[60vh]' />;
@@ -51,24 +43,19 @@ const UserProfile = () => {
 
     const onFinish = async (values) => {
         try {
-            const accessToken = userService.getAccessToken();
+            setLoading(true);
             if (selectedImage) {
                 let formData = new FormData();
                 formData.append('avatar', selectedImage);
-                setLoading(true);
-                await userService.updateAvatar(accessToken, formData)
-                setLoading(false);
+                const newAvatar = await userService.updateAvatar(formData)
+                dispatch(setAvatar(newAvatar.user))
             }
             if (values.username !== user?.username || values.email !== user?.email || values.phoneNumber !== user?.phoneNumber) {
-                const updatedUser = await userService.updateUserInfor(accessToken, values);
+                const updatedUser = await userService.updateUserInfor(values);
                 dispatch(setUser(updatedUser))
             }
-
-            setUserData({
-                avatar: selectedImage ? imagePreview : user?.avatar
-                , ...values
-            });
             setIsChanged(false)
+            setLoading(false);
             messageApi.open({
                 type: 'success',
                 content: 'Cập nhật thông tin thành công',

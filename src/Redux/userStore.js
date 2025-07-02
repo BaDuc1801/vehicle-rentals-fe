@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
     email: "",
     username: "",
-    phonenumber: "",
+    phoneNumber: "",
     role: "",
     paymentId: [],
     avatar: "https://res.cloudinary.com/dzpw9bihb/image/upload/v1726676632/wgbdsrflw8b1vdalkqht.jpg",
@@ -17,7 +17,7 @@ const userSlice = createSlice({
             const {
                 email ="",
                 username ="",
-                phonenumber ="",
+                phoneNumber ="",
                 role ="",
                 paymentId = [],
                 avatar ="https://res.cloudinary.com/dzpw9bihb/image/upload/v1726676632/wgbdsrflw8b1vdalkqht.jpg",
@@ -25,16 +25,20 @@ const userSlice = createSlice({
 
             state.email = email
             state.username = username
-            state.phonenumber = phonenumber
+            state.phoneNumber = phoneNumber
             state.role = role
             state.avatar = avatar
             state.paymentId = paymentId
         },
 
+        setAvatar: (state, action) => {
+            state.avatar = action.payload
+        },
+
         resetUser: (state) => {
             state.email =""
             state.username =""
-            state.phonenumber =""
+            state.phoneNumber =""
             state.role =""
             state.avatar =""
             state.paymentId = []
@@ -42,5 +46,5 @@ const userSlice = createSlice({
     }
 })
 
-export const {setUser, resetUser} = userSlice.actions;
+export const {setUser, resetUser, setAvatar} = userSlice.actions;
 export const userStore =  userSlice.reducer;
