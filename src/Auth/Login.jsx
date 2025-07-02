@@ -86,7 +86,7 @@ const Login = () => {
                         <Input.Password size='large' />
                     </Form.Item>
                     <Form.Item>
-                        <GoogleOAuthProvider clientId={clientID}>
+                        <GoogleOAuthProvider clientId={clientID} className="!w-full">
                             <GoogleLogin
                                 onSuccess={onSuccessGoogle}
                                 onError={() => {
