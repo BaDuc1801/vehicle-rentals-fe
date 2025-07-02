@@ -1,12 +1,29 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { userStore } from "./userStore";
-import { vehicleStore } from "./vehicleStore";
+import { persistReducer, persistStore } from "redux-persist";
+import storage from "redux-persist/lib/storage"; 
+import { combineReducers } from "redux";
+
+const rootReducer = combineReducers({
+    user: userStore,
+});
+
+const persistConfig = {
+    key: "root",
+    storage,
+    whitelist: ["search", "route", "voucher"] 
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-    reducer: {
-        user: userStore,
-        vehicle: vehicleStore
-    }
-})
+    reducer: persistedReducer,
+    middleware: getDefaultMiddleware =>
+        getDefaultMiddleware({
+            serializableCheck: false
+        })
+});
 
-export default store
+export const persistor = persistStore(store);
+
+export default store;
