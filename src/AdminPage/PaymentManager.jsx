@@ -1,5 +1,5 @@
 import { Input, Pagination, Table, Modal, Form, message, Select, DatePicker } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MdCancel } from 'react-icons/md';
 import paymentService from '../Services/paymentService';
 import { IoIosInformationCircle } from 'react-icons/io';
@@ -170,7 +170,6 @@ const PaymentManager = () => {
         className="my-4"
       />
 
-      {/* Edit Modal */}
       <Modal
         title="Cập nhật thông tin người dùng"
         open={isEditModalVisible}
@@ -209,7 +208,6 @@ const PaymentManager = () => {
         </Form>
       </Modal>
 
-      {/* Delete Modal */}
       <Modal
         title="Xác nhận hủy"
         open={isDeleteModalVisible}

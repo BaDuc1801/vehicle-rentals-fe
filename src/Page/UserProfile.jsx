@@ -1,5 +1,5 @@
 import { Button, Col, Form, Input, message, Row, Spin } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import userService from '../Services/userService'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAvatar, setUser } from '../Redux/userStore'

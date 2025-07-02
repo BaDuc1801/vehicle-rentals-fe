@@ -1,5 +1,5 @@
 import { Form, Steps, DatePicker, Input, Radio, Button, Spin, Modal, message } from 'antd'
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { AiFillTool } from 'react-icons/ai';
 import { BsFuelPumpFill } from 'react-icons/bs';
 import { GiJerrycan } from 'react-icons/gi';

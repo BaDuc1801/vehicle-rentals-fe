@@ -3,9 +3,11 @@ import { userStore } from "./userStore";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage"; 
 import { combineReducers } from "redux";
+import { vehicleStore } from "./vehicleStore";
 
 const rootReducer = combineReducers({
     user: userStore,
+    vehicle: vehicleStore
 });
 
 const persistConfig = {

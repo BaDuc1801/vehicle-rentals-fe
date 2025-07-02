@@ -10,7 +10,7 @@ const { RangePicker } = DatePicker;
 import moment from 'dayjs'
 import { Input } from 'antd';
 import vehicleService from '../Services/vehicleService'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 const { Search } = Input
 
 const DetailSearchPage = () => {
@@ -32,9 +32,10 @@ const DetailSearchPage = () => {
   const nav = useNavigate()
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     const fetchData = async () => {
       const data = await vehicleService.getAllvehicles({ vehicleType: vehicleType, startDate: pickupDate, endDate: dropoffDate, location: location, district: district, brand: brand, transmission: transmission, seats: seats, sortBy: sortBy });
-      const listLocation = await vehicleService.getAllvehicles({vehicleType: vehicleType});
+      const listLocation = await vehicleService.getAllvehicles({ vehicleType: vehicleType });
       setListCar(data)
       setLocationList(listLocation);
     }

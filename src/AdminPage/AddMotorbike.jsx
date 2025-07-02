@@ -1,5 +1,5 @@
 import { Button, Col, Form, Input, message, Row, Select } from 'antd';
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import vehicleService from '../Services/vehicleService';
 

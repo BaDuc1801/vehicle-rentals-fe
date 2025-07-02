@@ -1,4 +1,3 @@
-import React from 'react'
 import SearchForm from '../Components/SearchForm'
 import InforHomePage from '../Components/InforHomePage'
 

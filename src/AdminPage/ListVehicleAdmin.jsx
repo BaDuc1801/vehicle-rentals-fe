@@ -1,4 +1,3 @@
-import React from 'react'
 import DetailVehicleAdmin from './DetailVehicleAdmin'
 
 const ListVehicleAdmin = ({vehicles}) => {

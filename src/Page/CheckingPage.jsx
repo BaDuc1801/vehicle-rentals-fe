@@ -21,7 +21,7 @@ const CheckingPage = () => {
   const { search } = useContext(SearchContext);
   const [rentalDays, setRentalDays] = useState(0);
   const [selectedVehicle, setSelectedVehicle] = useState()
-  const [isModalVisible, setIsModalVisible] = useState(false); 
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,6 +29,7 @@ const CheckingPage = () => {
   }, [])
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (search.pickupDate && search.dropoffDate && selectedVehicle) {
       const rentalDays = moment(search.dropoffDate).diff(moment(search.pickupDate), 'days');
       const finalRentalDays = rentalDays < 1 ? 1 : rentalDays;
@@ -47,7 +48,7 @@ const CheckingPage = () => {
 
   const handleModalOk = () => {
     setIsModalVisible(false);
-    navigate('/dang-nhap'); 
+    navigate('/dang-nhap');
   };
 
   const handleModalCancel = () => {

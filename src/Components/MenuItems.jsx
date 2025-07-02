@@ -1,5 +1,4 @@
 import { Button, Dropdown } from 'antd'
-import React from 'react'
 import { FaSortDown } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'

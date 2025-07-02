@@ -1,4 +1,3 @@
-import React from 'react'
 import stepImg from '../assets/search.png'
 
 const InforHomePage = () => {

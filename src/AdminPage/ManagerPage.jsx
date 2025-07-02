@@ -1,45 +1,36 @@
 import { Menu } from 'antd';
 import { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import userService from '../Services/userService';
 import { AiFillHome } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
 
 const ManagerPage = () => {
     const nav = useNavigate();
     const [current, setCurrent] = useState('1');
+    const user = useSelector(state => state.user)
 
     useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const user = await userService.getUserInformation();
-            } catch (error) {
-                console.log(error);
-                nav("/")
-            }
-            if (user?.role === 'Admin') {
-                const currentPath = window.location.pathname;
-                const defaultPath = '/quan-ly/doanh-so';
-                const menuKeyMap = {
-                    '/quan-ly/doanh-so': '1',
-                    '/quan-ly/nguoi-dung': '2',
-                    '/quan-ly/don-hang': '3',
-                    '/quan-ly/xe': '4',
-                    '/quan-ly/xe/them-xe/o-to': '6',
-                    '/quan-ly/xe/them-xe/xe-may': '7',
-                };
+        if (user?.role === 'Admin') {
+            const currentPath = window.location.pathname;
+            const defaultPath = '/quan-ly/doanh-so';
+            const menuKeyMap = {
+                '/quan-ly/doanh-so': '1',
+                '/quan-ly/nguoi-dung': '2',
+                '/quan-ly/don-hang': '3',
+                '/quan-ly/xe': '4',
+                '/quan-ly/xe/them-xe/o-to': '6',
+                '/quan-ly/xe/them-xe/xe-may': '7',
+            };
 
-                if (menuKeyMap[currentPath]) {
-                    setCurrent(menuKeyMap[currentPath]);
-                } else {
-                    setCurrent('1');
-                    nav(defaultPath);
-                }
+            if (menuKeyMap[currentPath]) {
+                setCurrent(menuKeyMap[currentPath]);
             } else {
-                nav('/');
+                setCurrent('1');
+                nav(defaultPath);
             }
-        };
-
-        fetchUser();
+        } else {
+            nav('/');
+        }
     }, []);
 
     const handleMenuClick = (e) => {

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import bgHomeImg from '../assets/bgHome.jpg';
 import { Button, DatePicker, Form, Radio, Row, Select, Col } from 'antd';
 import { FaCarAlt, FaMotorcycle, FaMapMarkerAlt } from 'react-icons/fa';

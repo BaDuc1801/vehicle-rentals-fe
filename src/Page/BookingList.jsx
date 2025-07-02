@@ -1,5 +1,5 @@
 import { Tabs } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ListPayment from '../Components/ListPayment'
 import { useSelector } from 'react-redux'
 

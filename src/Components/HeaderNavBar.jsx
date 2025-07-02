@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import MenuItems from './MenuItems'
 import { SiDuckduckgo } from 'react-icons/si'
 import { Link } from 'react-router-dom'
@@ -11,11 +11,9 @@ const HeaderNavBar = () => {
         <>
             <div className='flex justify-between items-center lg:mx-[85px] p-4 max-lg:mx-[40px] max-sm:mx-[16px]'>
                 <div className='flex justify-start'>
-                    <Link to="">
-                        <div className='text-[rgb(44,184,175)] text-4xl font-bold flex justify-center items-center gap-2'>
-                            <SiDuckduckgo />
-                            <p>DUCKGO</p>
-                        </div>
+                    <Link to="" className='text-[rgb(44,184,175)] text-4xl font-bold flex justify-center items-center gap-2'>
+                        <SiDuckduckgo />
+                        <p>DUCKGO</p>
                     </Link>
                     <button className='border-[#2cb8af] text-[#2cb8af] border-[1px] rounded-sm p-1 text-[18px] hover:bg-[#2cb8af] hover:text-white hover:border-blue-300 ml-4 lg:block hidden'>Trở thành đối tác</button>
                 </div>

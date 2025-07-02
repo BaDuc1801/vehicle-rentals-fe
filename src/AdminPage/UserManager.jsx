@@ -1,5 +1,5 @@
 import { Input, Pagination, Table, Modal, Form, message, Select } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import userService from '../Services/userService';
 import { AiFillTool } from 'react-icons/ai';
 import { FaTrash } from 'react-icons/fa';
@@ -110,10 +110,10 @@ const UserManager = () => {
     ];
 
     const filteredUsers = userData?.filter((user) =>
-        (user?.username?.toLowerCase().includes(search?.toLowerCase() || '')) ||
-        (user?.phoneNumber?.toLowerCase().includes(search?.toLowerCase() || '')) ||
-        (user?.email?.toLowerCase().includes(search?.toLowerCase() || '')) ||
-        (user?._id?.toLowerCase().includes(search?.toLowerCase() || ''))
+        (user?.username?.toLowerCase().includes(search?.toLowerCase().trim() || '')) ||
+        (user?.phoneNumber?.toLowerCase().includes(search?.toLowerCase().trim() || '')) ||
+        (user?.email?.toLowerCase().includes(search?.toLowerCase().trim() || '')) ||
+        (user?._id?.toLowerCase().includes(search?.toLowerCase().trim() || ''))
     );
 
     const paginatedUsers = filteredUsers?.slice((currentPage - 1) * pageSize, currentPage * pageSize) || userData;
@@ -135,7 +135,6 @@ const UserManager = () => {
                 className="my-4"
             />
 
-            {/* Edit Modal */}
             <Modal
                 title="Cập nhật thông tin người dùng"
                 open={isEditModalVisible}
@@ -165,7 +164,6 @@ const UserManager = () => {
                 </Form>
             </Modal>
 
-            {/* Delete Modal */}
             <Modal
                 title="Xác nhận xóa"
                 open={isDeleteModalVisible}

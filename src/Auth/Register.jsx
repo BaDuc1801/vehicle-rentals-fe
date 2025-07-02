@@ -1,5 +1,4 @@
 import { Button, Form, Input } from 'antd'
-import React from 'react'
 import { SiDuckduckgo } from 'react-icons/si'
 import bgHomeImg from '../assets/bgHome.jpg'
 import { IoCaretBackOutline } from 'react-icons/io5'
