@@ -60,7 +60,7 @@ const ForgotPassword = () => {
                         <Input size='large' type='email' />
                     </Form.Item>
                     <Form.Item>
-                        <Button type='primary' htmlType='submit' size='large' className='w-ful' loading={isLoading}>Gửi</Button>
+                        <Button type='primary' htmlType='submit' size='large' className='w-full' loading={isLoading}>Gửi</Button>
                     </Form.Item>
                     <hr className='my-5' />
                     <div className='flex justify-between items-center'>
