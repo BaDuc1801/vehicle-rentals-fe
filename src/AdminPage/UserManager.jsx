@@ -26,6 +26,7 @@ const UserManager = () => {
     }, []);
 
     const handleEdit = (record) => {
+        form.resetFields();
         setSelectedUser(record);
         form.setFieldsValue(record);
         setIsEditModalVisible(true);
