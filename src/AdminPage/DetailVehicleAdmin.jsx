@@ -66,14 +66,14 @@ const DetailVehicleAdmin = ({ items }) => {
                         <div>
                             <p className='flex items-center gap-2'><TbManualGearboxFilled />{items?.transmission}</p>
                             {items.vehicleType === 'car' && ( items?.fuel === "Điện" ?
-                                <p className='grid grid-cols-2 gap-2 my-1'><GiJerrycan />{items?.fuelEfficiency}km/kWh</p>
+                                <p className='flex items-center gap-2 my-1'><GiJerrycan />{items?.fuelEfficiency}km/kWh</p>
                                 : <p className='flex items-center gap-2 my-1'><GiJerrycan />{items?.fuelEfficiency}l/100km</p> )
                             }
-                            <p className='flex items-center gap-2'><MdMap />{items?.district}, {items?.location}</p>
+                            <p className='flex items-center gap-2 whitespace-nowrap'><MdMap />{items?.district}, {items?.location}</p>
                         </div>
                         <div>
                             <p className='flex items-center gap-2'><BsFuelPumpFill />{items?.fuel}</p>
-                            <p className='flex items-center gap-2 mt-1'><AiFillTool />Sản xuất {items?.year}</p>
+                            <p className='flex items-center gap-2 mt-1 whitespace-nowrap'><AiFillTool />Sản xuất {items?.year}</p>
                         </div>
                     </div>
                 </div>

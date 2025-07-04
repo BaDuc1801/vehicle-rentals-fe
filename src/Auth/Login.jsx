@@ -1,4 +1,4 @@
-import { Button, Form, Input } from 'antd'
+import { Button, Form, Input, message, Modal, Statistic } from 'antd'
 import { SiDuckduckgo } from 'react-icons/si'
 import bgHomeImg from '../assets/bgHome.jpg'
 import { useNavigate } from 'react-router-dom'
@@ -8,10 +8,22 @@ import { GoogleLogin } from '@react-oauth/google'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../Redux/userStore'
 import { setSessionType } from '../Services/sessionService'
+import { signInWithPopup } from 'firebase/auth'
+import { auth, googleProvider } from '../firebase'
+import { useState } from 'react'
+import { firebasePhoneService } from '../Services/firebasePhoneService'
+import { FcGoogle } from "react-icons/fc";
+const { Countdown } = Statistic;
 
 const Login = () => {
     const [form] = Form.useForm();
-    const clientID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+    const [isModalPhoneNumberOpen, setIsModalPhoneNumberOpen] = useState(false);
+    const [isModalOtpOpen, setIsModalOtpOpen] = useState(false);
+    const [idToken, setIdToken] = useState();
+    const [messageApi, contextHolder] = message.useMessage();
+    const [email, setEmail] = useState()
+
+    // const clientID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
     const nav = useNavigate()
     const dispatch = useDispatch()
 
@@ -41,8 +53,48 @@ const Login = () => {
         nav("/")
     }
 
+    const [phone, setPhone] = useState('')
+    const [otp, setOtp] = useState('')
+
+    const handleSendOtp = async () => {
+        try {
+            try {
+                await userService.checkPhoneEmail(email, '+84' + phone.slice(1));
+                setIsModalOtpOpen(true);
+            } catch (error) {
+                messageApi.info("Số điện thoại không đúng với email này")
+            }
+            await firebasePhoneService.sendOtp('+84' + phone.slice(1))
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    const handleVerifyOtp = async () => {
+        try {
+            const phoneNumber = await firebasePhoneService.verifyOtp(otp)
+            await userService.loginGoogleFirebase(idToken, phoneNumber)
+            const userData = await userService.getUserInformation()
+            dispatch(setUser(userData))
+            setSessionType('auth')
+            nav('/')
+        } catch (err) {
+            console.error(err)
+            messageApi.error("OTP không hợp lệ")
+        }
+    }
+
+    const handleGoogleLogin = async () => {
+        const result = await signInWithPopup(auth, googleProvider);
+        const idToken = await result.user.getIdToken()
+        setEmail(result.user.email)
+        setIdToken(idToken)
+        setIsModalPhoneNumberOpen(true)
+    }
+
     return (
         <div className='flex h-screen'>
+            {contextHolder}
             <div className='text-[#2cb8af] text-6xl font-bold  flex flex-col justify-center items-center gap-2 w-1/2 h-full max-lg:hidden'>
                 <div className=' flex justify-center items-center '>
                     <SiDuckduckgo />
@@ -86,14 +138,22 @@ const Login = () => {
                         <Input.Password size='large' />
                     </Form.Item>
                     <Form.Item>
-                        <GoogleOAuthProvider clientId={clientID} className="!w-full">
+                        {/* <GoogleOAuthProvider clientId={clientID} className="!w-full">
                             <GoogleLogin
                                 onSuccess={onSuccessGoogle}
                                 onError={() => {
                                     console.log('Login Failed');
                                 }}
                             />
-                        </GoogleOAuthProvider>
+                        </GoogleOAuthProvider> */}
+                        <Button
+                            type='default'
+                            size='large'
+                            className='w-full mb-2'
+                            onClick={handleGoogleLogin}
+                        >
+                            <FcGoogle className='text-xl' /> Đăng nhập bằng Google
+                        </Button>
                         <Button htmlType="submit" type='primary' size='large' className='w-full mt-2'>Đăng nhập</Button>
                     </Form.Item>
                     <hr className='my-5' />
@@ -103,6 +163,58 @@ const Login = () => {
                     </div>
                 </Form>
             </div>
+            <Modal
+                open={isModalPhoneNumberOpen}
+                onCancel={() => { setIsModalPhoneNumberOpen(false), setPhone("") }}
+                footer={null}
+                title="Gửi số điện thoại"
+            >
+                <Form
+                    layout="vertical"
+                    onFinish={handleSendOtp}
+                >
+                    <Form.Item label="Số điện thoại">
+                        <Input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+84..." />
+                    </Form.Item>
+                    <Button type="primary" htmlType='submit' block>
+                        Gửi OTP
+                    </Button>
+                </Form>
+            </Modal>
+            <Modal
+                open={isModalOtpOpen}
+                onCancel={() => { setIsModalOtpOpen(false); setOtp("") }}
+                footer={null}
+                title="Xác minh OTP"
+            >
+                <Form
+                    layout="vertical"
+                    onFinish={handleVerifyOtp}
+                >
+                    <div className="text-sm mb-2 flex items-center">
+                        Hết hạn trong:&nbsp;
+                        <Countdown
+                            value={Date.now() + 5 * 60 * 1000}
+                            format="mm:ss"
+                            valueStyle={{ fontSize: '16px' }}
+                            onFinish={() => {
+                                messageApi.info('OTP đã hết hạn');
+                                setIsModalOtpOpen(false);
+                            }}
+                        />
+                    </div>
+                    <Form.Item label="Mã OTP:" className="mt-4 text-center">
+                        <Input.OTP
+                            value={otp}
+                            onChange={setOtp}
+                        />
+                    </Form.Item>
+                    <Button type="primary" htmlType='submit' block>
+                        Xác minh OTP
+                    </Button>
+                </Form>
+            </Modal>
+            <div id="recaptcha-container"></div>
         </div>
     )
 }

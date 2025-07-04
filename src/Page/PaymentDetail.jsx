@@ -14,6 +14,8 @@ import FormItem from 'antd/es/form/FormItem';
 import userService from '../Services/userService';
 import paymentService from '../Services/paymentService';
 import qrImg from '../assets/qr.jpg'
+import { useDispatch } from 'react-redux';
+import { setUser } from '../Redux/userStore';
 
 const PaymentDetail = () => {
     const [selectedVehicle, setSelectedVehicle] = useState();
@@ -23,6 +25,7 @@ const PaymentDetail = () => {
     const { search } = useContext(SearchContext)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [messageApi, contextHolder] = message.useMessage()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         setSelectedVehicle(JSON.parse(localStorage.getItem("checkingVehicle")))
@@ -56,6 +59,9 @@ const PaymentDetail = () => {
             totalPrice: checkingBill?.totalPrice,
             status: "pending",
         });
+        const updatedUser = await userService.getUserInformation();
+        dispatch(setUser(updatedUser))
+        
         if (form.getFieldValue('pay') === 'bank') {
             await messageApi.success({ content: 'Thanh toán thành công!' });
             navigate('/hoan-thanh');

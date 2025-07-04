@@ -25,6 +25,28 @@ const userService = {
         return res.data
     },
 
+    loginGoogleFirebase: async (idToken, phoneNumber) => {
+        const res = await axios.post(`${userUrl}/login-google-firebase`,
+            {
+                idToken: idToken,
+                phoneNumber: phoneNumber
+            },
+            { withCredentials: true }
+        )
+        return res.data
+    },
+
+    checkPhoneEmail: async (email, phoneNumber) => {
+        const res = await axios.post(`${userUrl}/check-phonenumber`,
+            {
+                email: email,
+                phoneNumber: phoneNumber
+            },
+            { withCredentials: true }
+        )
+        return res.data
+    },
+
     register: async (email, username, password) => {
         const res = await axios.post(`${userUrl}/register`, {
             email,
@@ -92,7 +114,6 @@ const userService = {
     },
 
     updateUserByAmin: async (userId, data) => {
-        const accessToken = userService.getAccessToken();
         const res = await axiosJWT.put(`${userUrl}/user/${userId}`, data, {
             withCredentials: true
         })

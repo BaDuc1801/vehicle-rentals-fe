@@ -23,7 +23,7 @@ const MenuItems = () => {
             <a>Về chúng tôi</a>
             <Dropdown
                 trigger={['click']}
-                placement="bottom"
+                placement="bottomRight"
                 menu={{
                     items: [
                         {
@@ -46,7 +46,7 @@ const MenuItems = () => {
                 (<Button className='text-[18px] p-5' type='primary' onClick={() => nav('/dang-nhap')}>Đăng nhập</Button>)
                 : (<Dropdown
                     trigger={['click']}
-                    placement="bottom"
+                    placement="bottomRight"
                     menu={{
                         items: [
                             user?.role === 'Admin' && {

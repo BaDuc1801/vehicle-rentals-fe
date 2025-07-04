@@ -15,7 +15,7 @@ const HeaderNavBar = () => {
                         <SiDuckduckgo />
                         <p>DUCKGO</p>
                     </Link>
-                    <button className='border-[#2cb8af] text-[#2cb8af] border-[1px] rounded-sm p-1 text-[18px] hover:bg-[#2cb8af] hover:text-white hover:border-blue-300 ml-4 lg:block hidden'>Trở thành đối tác</button>
+                    <button className='border-[#2cb8af] text-[#2cb8af] border-[1px] rounded-sm py-1 px-2 text-[18px] hover:bg-[#2cb8af] hover:text-white hover:border-blue-300 ml-4 lg:block hidden'>Trở thành đối tác</button>
                 </div>
                 <div className='flex justify-center text-[18px] gap-5 items-center max-lg:hidden'>
                     <MenuItems />

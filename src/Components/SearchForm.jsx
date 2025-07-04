@@ -131,7 +131,7 @@ const SearchForm = () => {
                                 </Col>
                             </Row>
                             <Form.Item>
-                                <Button htmlType="submit" type='primary' className="w-full text-[16px] py-4">
+                                <Button htmlType="submit" size='large' type='primary' className="w-full text-[16px] py-4">
                                     Tìm xe giá tốt
                                 </Button>
                             </Form.Item>

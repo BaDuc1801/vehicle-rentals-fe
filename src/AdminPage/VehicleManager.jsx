@@ -35,6 +35,10 @@ const VehicleManager = () => {
     fetchData()
   }, [location, district, brand, transmission, seats, sortBy, vehicleType])
 
+  useEffect(() => {
+        window.scrollTo(0, 0)
+  }, [currentPage])
+
   const paginatedCars = listVehicle?.list
     ?.filter((car) => car?.name.toLowerCase().includes(name?.toLowerCase() || ''))
     .slice((currentPage - 1) * pageSize, currentPage * pageSize);

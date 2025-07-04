@@ -71,7 +71,7 @@ const InforHomePage = () => {
             </div>
             <div className='bg-[#f2f4f7] pb-16'>
                 <p className='text-center mb-6 pt-10 text-3xl text-black'>Đặt xe như thế nào</p>
-                <div className='flex justify-center items-start max-md:items-center gap-12 max-md:flex-col'>
+                <div className='flex justify-between items-start max-md:items-center lg:px-[50px] xl:px-[150px] gap-12 max-lg:flex-col max-lg:items-center'>
                     {stepList.map((items, key) => (
                         <div key={key} className='flex flex-col justify-center items-center w-80 text-center gap-3'>
                             <img src={items.img} className='w-auto h-60'></img>
