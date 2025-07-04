@@ -124,7 +124,7 @@ const UserManager = () => {
         <div>
             {contextHolder}
             <Input.Search size="large" className="w-full" onChange={(e) => setSearch(e.target.value)} />
-            <Table columns={columns} dataSource={paginatedUsers} pagination={false} bordered isLoading={isLoading}/>
+            <Table columns={columns} dataSource={paginatedUsers} pagination={false} bordered loading={isLoading}/>
             <Pagination
                 align="center"
                 current={currentPage}
