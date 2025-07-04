@@ -12,6 +12,7 @@ const UserManager = () => {
     const [isEditModalVisible, setIsEditModalVisible] = useState(false);
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     const [messageApi, contextHolder] = message.useMessage();
     const [form] = Form.useForm();
 
@@ -19,6 +20,7 @@ const UserManager = () => {
         const fetchUserData = async () => {
             const data = await userService.getAllUser();
             setUserData(data);
+            setIsLoading(false);
         };
         fetchUserData();
     }, []);
@@ -122,7 +124,7 @@ const UserManager = () => {
         <div>
             {contextHolder}
             <Input.Search size="large" className="w-full" onChange={(e) => setSearch(e.target.value)} />
-            <Table columns={columns} dataSource={paginatedUsers} pagination={false} bordered />
+            <Table columns={columns} dataSource={paginatedUsers} pagination={false} bordered isLoading={isLoading}/>
             <Pagination
                 align="center"
                 current={currentPage}

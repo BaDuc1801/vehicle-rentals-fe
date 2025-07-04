@@ -14,6 +14,7 @@ const PaymentManager = () => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [status, setStatus] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const [messageApi, contextHolder] = message.useMessage();
   const [form] = Form.useForm();
 
@@ -21,6 +22,7 @@ const PaymentManager = () => {
     const fetchpaymentData = async () => {
       const data = await paymentService.getAllPayment({ status: status });
       setPaymentData(data);
+      setIsLoading(false)
     };
     fetchpaymentData();
   }, [status]);
@@ -157,7 +159,7 @@ const PaymentManager = () => {
             { value: 'canceled', label: 'Đã hủy' }]}>
         </Select>
       </div>
-      <Table columns={columns} dataSource={paginatedUsers} pagination={false} bordered />
+      <Table columns={columns} dataSource={paginatedUsers} pagination={false} bordered loading={isLoading}/>
       <Pagination
         align="center"
         current={currentPage}
