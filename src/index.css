@@ -12,3 +12,7 @@
 :where(.css-dev-only-do-not-override-13o2ubs).ant-radio-button-wrapper:not(:first-child)::before {
   width: 0;
 }
+
+:where(.css-13o2ubs).ant-radio-button-wrapper:not(:first-child)::before {
+  width: 0;
+}
