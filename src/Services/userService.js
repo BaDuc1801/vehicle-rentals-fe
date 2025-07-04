@@ -57,7 +57,7 @@ const userService = {
     },
 
     getUserInformation: async () => {
-        const respond = await axiosJWT.get(`${userUrl}/get-infor`,
+        const respond = await axiosJWT.get(`${userUrl}/get-infor`, {},
             {
                 withCredentials: true
             });
